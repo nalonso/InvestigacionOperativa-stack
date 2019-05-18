@@ -15,7 +15,7 @@ struct stack {
 
 
 int newStack(struct stack *);
-int pushStack(struct stack *, int data);
+int pushStack(struct stack *, int);
 int popStack(struct stack *, struct element *);
 int dumpStack(struct stack *);
 int isEmptyStack(struct stack);
@@ -45,12 +45,43 @@ int main()
     while(count == 1 || toInsert > 0){
         printf( "Ingrese un Número para insertar en la pila (si no desea insertar más coloque -1)\n");
         scanf("%d", &toInsert );
-        if(toInsert >0)
+        if(toInsert > 0)
             pushStack(&tempStack, toInsert);
+        count = 0;
     }
+    printf("Imprimiendo pila Temporal\n");
     dumpStack(&tempStack);
 
-    printf("Hello world!\n");
+    /*
+     * Clasificar pila temporal a Pares e Impares
+     *
+     */
+
+    struct element toClasified;
+    int value = 0;
+    while(isEmptyStack(tempStack) != 1){
+        popStack(&tempStack, &toClasified);
+        value = toClasified.data;
+        if(value%2 == 0){
+            pushStack(&evenStack, value);
+        } else {
+            pushStack(&oddStack, value);
+        }
+    }
+
+    /*
+     *
+     *
+     */
+
+    printf("\n");
+    printf("Imprimiendo pila de Pares\n");
+    dumpStack(&evenStack);
+
+    printf("\n");
+    printf("Imprimiendo pila de Impares\n");
+    dumpStack(&oddStack);
+
     return 0;
 }
 
@@ -75,7 +106,6 @@ int pushStack(struct stack *p, int toPush){
 
 int popStack(struct stack *p, struct element *elementOut){
 	if (isEmptyStack(*p) ) { return -1; }
-
 	elementOut->data = p->top->data;
 	p->top = p->top->next;
 	p->size--;

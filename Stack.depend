@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1558202179 source:d:\personal\investigaciónoperativa\stack\main.c
+1558205460 source:d:\personal\investigaciónoperativa\stack\main.c
 	<stdio.h>
 	<stdlib.h>
 	<malloc.h>
